@@ -20,8 +20,11 @@ WORKDIR /app
 # Copy file JAR từ giai đoạn build sang giai đoạn runtime
 COPY --from=build /app/target/*.jar app.jar
 
-# Chỉ định cổng mà ứng dụng sẽ chạy
-EXPOSE 80
+# Thiết lập biến môi trường PORT (Render sẽ ghi đè giá trị này)
+ENV PORT 8080
 
-# Khởi chạy ứng dụng
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Expose cổng để ứng dụng lắng nghe, Render sẽ tự động gán cổng này
+EXPOSE 8080
+
+# Khởi chạy ứng dụng và lắng nghe trên cổng PORT
+ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-jar", "app.jar"]
