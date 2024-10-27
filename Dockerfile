@@ -1,5 +1,5 @@
-# Sử dụng image maven để build ứng dụng (giai đoạn build)
-FROM maven:3.8.4-openjdk-17-slim AS build
+# Sử dụng image maven với JDK 21 để build ứng dụng (giai đoạn build)
+FROM maven:3.8.4-openjdk-21-slim AS build
 
 # Thiết lập thư mục làm việc trong container
 WORKDIR /app
@@ -11,8 +11,8 @@ COPY src ./src
 # Tải dependencies và build ứng dụng
 RUN mvn clean package -DskipTests
 
-# Tạo image mới với JDK nhẹ hơn chỉ để chạy ứng dụng (giai đoạn runtime)
-FROM openjdk:17-jdk-slim
+# Tạo image mới với JDK 21 nhẹ hơn chỉ để chạy ứng dụng (giai đoạn runtime)
+FROM openjdk:21-jdk-slim
 
 # Thiết lập thư mục làm việc cho ứng dụng
 WORKDIR /app
