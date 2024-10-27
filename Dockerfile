@@ -20,6 +20,7 @@ WORKDIR /app
 # Copy file JAR từ giai đoạn build sang giai đoạn runtime
 COPY --from=build /app/target/*.jar app.jar
 
+EXPOSE 10000
 
 # Khởi chạy ứng dụng và lắng nghe trên cổng PORT
 ENTRYPOINT ["java", "-jar", "app.jar"]
