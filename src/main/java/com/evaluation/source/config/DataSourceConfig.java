@@ -13,7 +13,7 @@ public class DataSourceConfig {
     DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/exe201?createDatabaseIfNotExist=TRUE&encrypt=TRUE;trustServerCertificate=TRUE;");
+        dataSource.setUrl("jdbc:mysql://root:JRkvJNtUNfrTEghKLkIAoEATRzMdPkYN@autorack.proxy.rlwy.net:33589/exe201?createDatabaseIfNotExist=TRUE&encrypt=TRUE;trustServerCertificate=TRUE;");
 
         return dataSource;
     }
