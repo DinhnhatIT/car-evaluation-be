@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Chỉ định cổng mà ứng dụng sẽ chạy
-EXPOSE 10000
+EXPOSE 80
 
 # Khởi chạy ứng dụng
 ENTRYPOINT ["java", "-jar", "app.jar"]
