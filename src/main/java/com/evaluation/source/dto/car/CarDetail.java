@@ -23,6 +23,7 @@ public class CarDetail implements Serializable{
     private Integer year;
     private Integer mileage;
     private Double price;
+    private Double buyPrice;
     private List<String> images;
     private String carOwnerId;
     private String desc;

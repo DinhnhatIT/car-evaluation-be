@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.evaluation.source.dto.car.CarDetail;
 import com.evaluation.source.dto.car.CarRequest;
 import com.evaluation.source.model.Car;
 import com.evaluation.source.model.CarInfo;
@@ -111,18 +112,24 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public String valuation(CarRequest carRequest) {
+    public CarDetail valuation(CarRequest carRequest) {
         // List<Car> cars = carRepository.findCar(carRequest.getModelId(), carRequest.getVersion(), carRequest.getYear(), carRequest.getColor());
 
         Model model = modelRepository.findById(carRequest.getModelId()).orElseThrow();
         double yearReduce = (2024-carRequest.getYear())*7;
         double repairReduce = adjustPriceByRepairs(carRequest.getRepairAreas());
-        double price = carRequest.getPrice() * (1 - (yearReduce+repairReduce)/100);
-
+        long price = Math.round(carRequest.getPrice() * (1 - (yearReduce+repairReduce)/100) / 1_000_000) * 1_000_000;
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         numberFormat.setMaximumFractionDigits(0);
 
-        return model.getBrand().getName() + " " + model.getName()  + ": " + String.valueOf(numberFormat.format(price));
+        return CarDetail.builder()
+                        .brandName(model.getBrand().getName())
+                        .modelName(model.getName())
+                        .year(carRequest.getYear())
+                        .version(carRequest.getVersion())
+                        .price((double) price)
+                        .buyPrice(carRequest.getPrice())
+                        .build();
     }  
 
     public double adjustPriceByRepairs(List<Integer> carRepairs) {

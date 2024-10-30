@@ -2,6 +2,7 @@ package com.evaluation.source.controller;
 
 import com.evaluation.source.base.BaseController;
 import com.evaluation.source.dto.base.ResultResponse;
+import com.evaluation.source.dto.car.CarDetail;
 import com.evaluation.source.dto.car.CarRequest;
 import com.evaluation.source.model.Brand;
 import com.evaluation.source.model.Car;
@@ -42,8 +43,8 @@ public class CarController extends BaseController{
     @PostMapping("/valuation")
     public ResponseEntity<ResultResponse> valuation(@RequestBody CarRequest carRequest) {
         System.err.println(carRequest.getYear()+ "---------------------------------------------");
-        String price = carService.valuation(carRequest);
-        return buildResponse("Car value", price);
+        CarDetail car = carService.valuation(carRequest);
+        return buildResponse("Car value", car);
     }
 
     @GetMapping("/brands")

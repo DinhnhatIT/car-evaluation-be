@@ -1,5 +1,6 @@
 package com.evaluation.source.service.i;
 
+import com.evaluation.source.dto.car.CarDetail;
 import com.evaluation.source.dto.car.CarRequest;
 import com.evaluation.source.model.Car;
 import com.evaluation.source.model.CarInfo;
@@ -31,5 +32,5 @@ public interface CarService {
 
     public void DeleteCarInfoById(Long id);
 
-    public String valuation(CarRequest carRequest);
+    public CarDetail valuation(CarRequest carRequest);
 }
